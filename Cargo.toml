@@ -1,8 +1,11 @@
 [package]
 name = "astrum-deus-commons"
+description = "AstrumDeus Commons Lib."
 authors = ["lightless <lightless@foxmail.com>"]
 version = "0.1.0"
 edition = "2021"
+license = "AGPL-3.0"
+repository = "https://github.com/lightless233/astrum-deus-commons"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
