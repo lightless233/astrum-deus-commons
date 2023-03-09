@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Default)]
 pub struct ScanResult {
     pub port: Vec<PortResultItem>,
-    
+
     // 以下字段尚未用到
     pub vulns: Vec<VulnResultItem>,
     pub domain: Vec<DomainResultItem>,
@@ -56,7 +56,6 @@ pub struct VulnResultItem {
     pub description: String,
 }
 
-
 /// Package 输出用的结构体
 #[derive(Debug, Serialize)]
 pub struct PackageStdoutResult {
@@ -93,4 +92,20 @@ pub struct PackageArgs {
     target: String,
     task_id: String,
     params: HashMap<String, String>,
+}
+
+impl PackageArgs {
+    pub fn parse_args() -> Result<Self, String> {
+        let args: Vec<String> = std::env::args().collect();
+        if args.len() < 2 {
+            return Err(format!(
+                "Not enough arguments. required: ./{} params_json",
+                args[0]
+            ));
+        }
+
+        serde_json::from_str::<Self>(&args[1]).map_err(|e| {
+            format!("Error while deserialize argument to PackageArgs. Err: {e:?}. args: {args:?}")
+        })
+    }
 }

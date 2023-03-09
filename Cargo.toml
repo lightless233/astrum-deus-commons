@@ -2,7 +2,7 @@
 name = "astrum-deus-package-sdk"
 description = "AstrumDeus Package SDK. Used for write AstrumDeus packages."
 authors = ["lightless <lightless@foxmail.com>"]
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 license = "AGPL-3.0"
 repository = "https://github.com/lightless233/astrum-deus-commons"
