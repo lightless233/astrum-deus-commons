@@ -89,9 +89,9 @@ impl PackageStdoutResult {
 /// Package 的输入相关
 #[derive(Debug, Deserialize)]
 pub struct PackageArgs {
-    target: String,
-    task_id: String,
-    params: HashMap<String, String>,
+    pub target: String,
+    pub task_id: String,
+    pub params: HashMap<String, String>,
 }
 
 impl PackageArgs {
