@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize, Deserialize, Default)]
@@ -52,4 +54,43 @@ pub struct VulnResultItem {
     pub title: String,
     pub url: String,
     pub description: String,
+}
+
+
+/// Package 输出用的结构体
+#[derive(Debug, Serialize)]
+pub struct PackageStdoutResult {
+    success: bool,
+    result_path: Option<String>,
+    error: Option<String>,
+}
+
+impl PackageStdoutResult {
+    pub fn ok(result_path: impl Into<String>) {
+        let s = Self {
+            success: true,
+            result_path: Some(result_path.into()),
+            error: None,
+        };
+
+        println!("{}", serde_json::to_string(&s).unwrap());
+    }
+
+    pub fn err(error: impl Into<String>) {
+        let s = Self {
+            success: false,
+            result_path: None,
+            error: Some(error.into()),
+        };
+
+        println!("{}", serde_json::to_string(&s).unwrap());
+    }
+}
+
+/// Package 的输入相关
+#[derive(Debug, Deserialize)]
+pub struct PackageArgs {
+    target: String,
+    task_id: String,
+    params: HashMap<String, String>,
 }
